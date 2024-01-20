@@ -11,6 +11,6 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "moduleDetection": "force",
-    "declaration": true
-  }
+    "declaration": true,
+  },
 }

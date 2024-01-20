@@ -1,6 +1,6 @@
 interface HealthStats {
-  height: number,
-  weight: number
+  height: number;
+  weight: number;
 }
 
 export const calculateBmi = (height: number, weight: number): string => {
@@ -19,8 +19,7 @@ export const calculateBmi = (height: number, weight: number): string => {
 };
 
 export const parseArgs = (args: string[]): HealthStats => {
-  if (args.length < 2)
-    throw new Error('Not enough arguments!');
+  if (args.length < 2) throw new Error('Not enough arguments!');
 
   const height = Number(args[0]);
   const weight = Number(args[1]);

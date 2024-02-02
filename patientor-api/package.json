@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "tsc": "tsc",
-    "dev": "tsx watch index.ts",
+    "tsc": "tsc && tsc-alias",
+    "dev": "tsx watch src/index.ts",
     "lint": "eslint --ext .ts .",
-    "start": "node build/index.js",
+    "start": "node build/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alan Varde",
@@ -19,6 +19,7 @@
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
+    "tsc-alias": "^1.8.8",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },

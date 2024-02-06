@@ -1,20 +1,18 @@
+import Part from './Part.tsx';
+import { CoursePart } from '../types.ts';
+
 const Content = ({ courseParts }: ContentProps) => {
   return (
     <div>
       {courseParts.map((part) => (
-        <p key={part.name}>
-          {part.name} {part.exerciseCount}
-        </p>
+        <Part key={part.name} coursePart={part} />
       ))}
     </div>
   );
 };
 
 interface ContentProps {
-  courseParts: {
-    name: string;
-    exerciseCount: number;
-  }[];
+  courseParts: CoursePart[];
 }
 
 export default Content;

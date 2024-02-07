@@ -1,12 +1,14 @@
 import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import diariesService from '../services/diaries';
 import { DiaryEntry } from '../types.ts';
+import { isAxiosError } from 'axios';
 
 const NewEntryForm = ({ setEntries }: NewEntryFormProps) => {
   const [date, setDate] = useState('');
   const [visibility, setVisibility] = useState('');
   const [weather, setWeather] = useState('');
   const [comment, setComment] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -23,15 +25,22 @@ const NewEntryForm = ({ setEntries }: NewEntryFormProps) => {
         setVisibility('');
         setWeather('');
         setComment('');
+        setError(null);
       })
       .catch((error) => {
-        console.error(error);
+        if (isAxiosError(error)) {
+          const msg = String(error.response?.data).match(/Error:.*/)?.[0];
+          setError(msg || 'An unknown error occurred');
+        } else {
+          console.error(error);
+        }
       });
   };
 
   return (
     <div>
       <h2>Add new entry</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="date">Date</label>

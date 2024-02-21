@@ -12,6 +12,35 @@ export enum Gender {
 
 export interface Entry {}
 
+interface BaseEntry {
+  id: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnosis['code']>;
+  description: string;
+}
+
+interface OccupationalHealthcareEntry extends BaseEntry {
+  type: 'OccupationalHealthcare';
+  employerName: string;
+  sickLeave?: {
+    startDate: string;
+    endDate: string;
+  };
+}
+
+interface HospitalEntry extends BaseEntry {
+  type: 'Hospital';
+  discharge: {
+    date: string;
+    criteria: string;
+  };
+}
+
+export type Entry =
+  | OccupationalHealthcareEntry
+  | HospitalEntry;
+
 export interface Patient {
   id: string;
   name: string;

@@ -8,6 +8,13 @@ const getAll = async (): Promise<Diagnosis[]> => {
   return data;
 };
 
+const getAllByCodes = async (codes: string[]): Promise<Diagnosis[]> => {
+  const { data } = await axios.get<Diagnosis[]>(`${apiBaseUrl}/diagnoses`);
+
+  return data.filter((diagnosis) => codes.includes(diagnosis.code));
+};
+
 export default {
   getAll,
+  getAllByCodes,
 };

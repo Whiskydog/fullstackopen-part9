@@ -1,0 +1,10 @@
+.entry-details {
+  padding: 0.25em;
+  margin: 1em 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.entry-details p {
+  margin: 0.5em;
+}

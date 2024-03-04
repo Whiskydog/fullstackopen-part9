@@ -1,27 +1,25 @@
 import { Entry } from "../../types.ts";
+import { assertNever } from "../../utils.ts";
+import HospitalEntryDetails from "./HospitalEntryDetails.tsx";
+import OccupationalHealthcareEntryDetails from "./OccupationalHealthcareEntryDetails.tsx";
+import HealthCheckEntryDetails from "./HealthCheckEntryDetails.tsx";
+import "./style.css";
 
 interface EntryProps {
   entry: Entry;
-  getDiagnosisName: (code: string) => string;
 }
 
-const EntryDetails = ({ entry, getDiagnosisName }: EntryProps) => {
-  return (
-    <div>
-      <p>
-        {entry.date} {entry.description}
-      </p>
-      {entry.diagnosisCodes && (
-        <ul>
-          {entry.diagnosisCodes.map((code) => (
-            <li key={code}>
-              {code} {getDiagnosisName(code)}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
+const EntryDetails = ({ entry }: EntryProps) => {
+  switch (entry.type) {
+    case "Hospital":
+      return <HospitalEntryDetails entry={entry} />;
+    case "OccupationalHealthcare":
+      return <OccupationalHealthcareEntryDetails entry={entry} />;
+    case "HealthCheck":
+      return <HealthCheckEntryDetails entry={entry} />;
+    default:
+      assertNever(entry);
+  }
 };
 
 export default EntryDetails;
